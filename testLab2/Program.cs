@@ -19,8 +19,9 @@ namespace testLab2
             // (b)stores the numbers 0 through 127 in the vertices, in that order;
             for(int i = 0; i< graphSize; i++)
             {
-                g.addVertexData(i, g.getVertexData(i));
+                g.addVertexData(i, i);
             }
+            Console.WriteLine(g);
 
            
 
@@ -44,13 +45,6 @@ namespace testLab2
 
             expected results:
 */
-
-
-
-
-
-
-                         Console.WriteLine("Hello World!");
         }
     }
 }

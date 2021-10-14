@@ -21,6 +21,10 @@ namespace testLab2
         }
         public void addEdge(int vertex1, int vertex2)
         {
+            //Do not allow loops!!
+            if(vertex1 == vertex2) throw Exception("Do not input loop");
+            edges[vertex1, vertex2] = 1;
+            edges[vertex2, vertex1] = 1;
         }
         public void removeEdge(int vertex1, int vertex2)
         {
@@ -36,7 +40,7 @@ namespace testLab2
         }
         public int getNumVertices()
         {
-            return 0;
+            return vertices.Length;
         }
         public bool isConnected()
         {
@@ -52,7 +56,35 @@ namespace testLab2
         }
         public override string ToString()
         {
-            return "";
+            string ret = "";
+            ret += "This graph has " + getNumVertices() + " verticies.";
+            ret += "\r\n";
+            ret += "This vertex information is as follows: ";
+            for(int i = 0; i < getNumVertices(); i++)
+            {
+                ret += "\r\n";
+                ret += "vertex #" + i + " contains " + vertices[i];
+            }
+            ret += "\r\n";
+            ret += "The edge are as follows";
+            bool atLeastOneEdgeExists = false;
+            for(int i = 0; i < getNumVertices(); i++)
+            {
+                for(int j = 0; j < i; j ++)
+                {
+                    if(hasEdge(i, j))
+                    {
+                        ret += "\r\n";
+                        ret += "{" + i + "," + j + "}";
+                    }
+                }
+            }
+            if(!atLeastOneEdgeExists)
+            {
+                ret += "\r\n";
+                ret += "NO EDGES TO SEE!";
+            }
+            return ret;
         }
     }
 }

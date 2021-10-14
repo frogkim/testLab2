@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Modified by Jong-Young Choi
+// ---------------
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,22 +19,30 @@ namespace testLab2
         }
         public void addVertexData(int vertexNumber, object vertexData)
         {
-            // TO DO: throw an exception if vertexNumber is bad
+            if(vertexNumber >= vertices.Length || vertexNumber < 0) throw Exception("Invalid vertex1 number.");
             vertices[vertexNumber] = vertexData;
         }
+
         public void addEdge(int vertex1, int vertex2)
         {
-            //Do not allow loops!!
             if(vertex1 == vertex2) throw Exception("Do not input loop");
-            edges[vertex1, vertex2] = 1;
-            edges[vertex2, vertex1] = 1;
+            if(vertex1 >= vertices.Length || vertex1 < 0) throw Exception("Invalid vertex1 number.");
+            if(vertex2 >= vertices.Length || vertex2 < 0) throw Exception("Invalid vertex2 number.");
+            edges[vertex1, vertex2] = true;
+            edges[vertex2, vertex1] = true;
         }
         public void removeEdge(int vertex1, int vertex2)
         {
+            // It is about removing. It is not necessary to check loop.
+            if(vertex1 >= vertices.Length || vertex1 < 0) throw Exception("Invalid vertex1 number.");
+            if(vertex2 >= vertices.Length || vertex2 < 0) throw Exception("Invalid vertex2 number.");
+            edges[vertex1, vertex2] = false;
+            edges[vertex2, vertex1] = false;
         }
         public bool hasEdge(int vertex1, int vertex2)
         {
-            return false;
+            if(edges[vertex1, vertex2] == true) return true;
+            else return false;
         }
         public object getVertexData(int vertexNumber)
         {
@@ -44,16 +55,25 @@ namespace testLab2
         }
         public bool isConnected()
         {
+            // TODO
             return false;
         }
         public bool hasCycle()
         {
+            // TODO
             return false;
         }
         public bool isTree()
         {
+            // TODO
             return false;
         }
+        protected Exception Exception(string s)
+        {
+            Console.WriteLine(s);
+            throw new NotImplementedException();
+        }
+
         public override string ToString()
         {
             string ret = "";
@@ -86,5 +106,7 @@ namespace testLab2
             }
             return ret;
         }
-    }
-}
+
+
+    } // end class Graph
+} // end namespace testLab2

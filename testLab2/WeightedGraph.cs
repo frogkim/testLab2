@@ -1,4 +1,8 @@
+// Modified by Jong-Young Choi
+// ---------------
+
 using System;
+using System.Collections.Generic;
 
 namespace testLab2
 {
@@ -6,11 +10,11 @@ namespace testLab2
     {
         private class WeightedEdge : IComparable
         {
-            public int vertex1;
-            public int vertex2;
-            public double weight;
+            public int vertex1 { get; set; }
+            public int vertex2 { get; set; }
+            public double weight { get; set; }
 
-            public WeigtedEdge(int firstVertex, int secondVertex, double theWeight)
+            public WeightedEdge(int firstVertex, int secondVertex, double theWeight)
             {
                 vertex1 = firstVertex;
                 vertex2 = secondVertex;
@@ -36,23 +40,28 @@ namespace testLab2
             //vertices = new object[numVertices]; // illegal. vertices array is private. If we chagne private to protected, it works.
             //Also, we declare it, vertices array will lost before data and declared new one.
             edgeWeights = new double[numVertices, numVertices];
-            //edgeWeights = new double(numVertices, numVertices);
-            
         }
 
         public double getEdgeWeight(int vertex1, int vertex2)
         {
-            // TODO: check whether this request is valid:
-            // (0) vertex1 and vertex2 must be valid indexes for edgeWeights
-            // (1) there must be an edge from vertex1 to vertex2
+            isValidEdge(vertex1, vertex2);
             return edgeWeights[vertex1, vertex2];
         }
 
         public void setEdgeWeight(int vertex1, int vertex2, double theWeight)
         {
-            // TODO: check whether this request is valid...
+            isValidEdge(vertex1, vertex2);
             edgeWeights[vertex1, vertex2] = theWeight;
             edgeWeights[vertex2, vertex1] = theWeight;
+        }
+
+        // custom method added        
+        private void isValidEdge(int vertex1, int vertex2)
+        {
+            if (vertex1 == vertex2) throw Exception("Do not input loop");
+            if (vertex1 >= getNumVertices() || vertex1 < 0) throw Exception("Invalid vertex1 number.");
+            if (vertex2 >= getNumVertices() || vertex2 < 0) throw Exception("Invalid vertex2 number.");
+            if (hasEdge(vertex1, vertex2) == false) throw Exception("No Edge existed.");
         }
 
         public WeightedGraph minWeightSpanningTree()

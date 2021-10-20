@@ -19,7 +19,7 @@ namespace testLab2
         }
         public void addVertexData(int vertexNumber, object vertexData)
         {
-            if(vertexNumber >= vertices.Length || vertexNumber < 0) throw Exception("Invalid vertex1 number.");
+            if(vertexNumber >= vertices.Length || vertexNumber < 0) throw Exception("Invalid vertexNumber.");
             vertices[vertexNumber] = vertexData;
         }
 
@@ -46,7 +46,7 @@ namespace testLab2
         }
         public object getVertexData(int vertexNumber)
         {
-            // TO DO: throw an exception if vertexNumber is bad
+            if (vertexNumber >= vertices.Length || vertexNumber < 0) throw Exception("Invalid vertexNumber.");
             return vertices[vertexNumber];
         }
         public int getNumVertices()
@@ -68,10 +68,33 @@ namespace testLab2
             // TODO
             return false;
         }
+        
         protected Exception Exception(string s)
         {
             Console.WriteLine(s);
             throw new NotImplementedException();
+        }
+
+        private int[] DFS(int a)
+        {
+            int[] verticeDFS = new object[vertices.Length];
+            int order = 1;
+            DFS_Recursive(0, verticeDFS, order);
+            return verticeDFS;
+        }
+
+        private void DFS_Recursive(int index, int[] verticeArray, ref int order)
+        {
+            verticeArray[index] = order;
+            order++;
+            for(int i=0; i<vertices.Length; i++)
+            {
+                if(index == i) continue;
+                if(edges[index,i] == true)
+                {
+                    DFS_Recursive(i, verticeArray, order);
+                }
+            }
         }
 
         public override string ToString()
@@ -106,7 +129,5 @@ namespace testLab2
             }
             return ret;
         }
-
-
     } // end class Graph
 } // end namespace testLab2

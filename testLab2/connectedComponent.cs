@@ -34,14 +34,15 @@ namespace testLab2
 
         void DFS_Recursive(Graph g, int start, int[] vertexTmp, ref int order)
         {
-            for(int i = start+1; i < g.getNumVertices(); i++)
+            vertexTmp[start] = order;
+            order++;
+            for (int i = start+1; i < g.getNumVertices(); i++)
             {
                 if (g.hasEdge(start, i))
                 {
-
+                    DFS_Recursive(g, start, vertexTmp, ref order);
                 }
             }
-            
         }
     }
 }

@@ -1,3 +1,9 @@
+// Note. Oct 21. 2021. 09.22 AM
+// check cycle.
+// DFS_recursive is finding from index 1. If there is cycle, it can loop and doesn't end
+
+
+
 namespace testLab2
 {
     class user

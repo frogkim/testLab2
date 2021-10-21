@@ -64,41 +64,42 @@ namespace testLab2
             if (hasEdge(vertex1, vertex2) == false) throw Exception("No Edge existed.");
         }
 
-        public WeightedGraph minWeightSpanningTree()
-        {
-            if(!isConnected())
-            {
-                throw new Exception("Invoking graph is not connected, has no spanning trees!");
-            }
-            int n = getNumVertices();
-            WeightedGraph T = new WeightedGraph(n);
-            var edgeArray = new List<WeightedEdge>();
-            for(int i=0; i<n; i++)
-            {
-                for(int j=0; j<n; j++)
-                {
-                    if(hasEdge(i,j))
-                    {
-                        edgeArray.Add(new WeightedEdge(i, j, edgeWeights[i,j]));
-                    }
-                }
-            }
+        // TODO
+        //public WeightedGraph minWeightSpanningTree()
+        //{
+        //    if(!isConnected())
+        //    {
+        //        throw new Exception("Invoking graph is not connected, has no spanning trees!");
+        //    }
+        //    int n = getNumVertices();
+        //    WeightedGraph T = new WeightedGraph(n);
+        //    var edgeArray = new List<WeightedEdge>();
+        //    for(int i=0; i<n; i++)
+        //    {
+        //        for(int j=0; j<n; j++)
+        //        {
+        //            if(hasEdge(i,j))
+        //            {
+        //                edgeArray.Add(new WeightedEdge(i, j, edgeWeights[i,j]));
+        //            }
+        //        }
+        //    }
 
-            edgeArray.Sort();
+        //    edgeArray.Sort();
 
-            while(!T.isConnected())
-            {
-                // add next edge of invoking graph to T (already sorted)
-                WeightedEdge we = edgeArray[index];
-                T.addEdge(we.vertex1, we.vertex2);
-                T.edgeWeights[we.vertex1, we.vertex2] = we.weight;
-                if(T.hasCycle())
-                {
-                    T.removeEdge(we.vertex1, we.vertex2);
-                }
-                index++;
-            }
-            return T;
-        }
+        //    while(!T.isConnected())
+        //    {
+        //        // add next edge of invoking graph to T (already sorted)
+        //        WeightedEdge we = edgeArray[index];
+        //        T.addEdge(we.vertex1, we.vertex2);
+        //        T.edgeWeights[we.vertex1, we.vertex2] = we.weight;
+        //        if(T.hasCycle())
+        //        {
+        //            T.removeEdge(we.vertex1, we.vertex2);
+        //        }
+        //        index++;
+        //    }
+        //    return T;
+        //}
     }
 }

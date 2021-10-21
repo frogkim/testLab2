@@ -77,9 +77,9 @@ namespace testLab2
 
         private int[] DFS(int a)
         {
-            int[] verticeDFS = new object[vertices.Length];
+            int[] verticeDFS = new int[vertices.Length];
             int order = 1;
-            DFS_Recursive(0, verticeDFS, order);
+            DFS_Recursive(0, verticeDFS, ref order);
             return verticeDFS;
         }
 
@@ -92,7 +92,7 @@ namespace testLab2
                 if(index == i) continue;
                 if(edges[index,i] == true)
                 {
-                    DFS_Recursive(i, verticeArray, order);
+                    DFS_Recursive(i, verticeArray, ref order);
                 }
             }
         }
